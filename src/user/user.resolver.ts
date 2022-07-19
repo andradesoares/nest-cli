@@ -3,6 +3,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Resolver()
 export class UserResolver {
@@ -15,9 +17,17 @@ export class UserResolver {
     return users;
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
   async findUser(@Args('id') id: string): Promise<User> {
     const user = await this.userService.findUser(id);
+
+    return user;
+  }
+
+  @Query(() => User)
+  async findUserByEmail(@Args('email') email: string): Promise<User> {
+    const user = await this.userService.findUserByEmail(email);
 
     return user;
   }
