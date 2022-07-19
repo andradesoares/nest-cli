@@ -5,6 +5,7 @@ export default class Util {
     const user = new User();
 
     user.email = 'test@test.com';
+    user.password = '1234';
     user.name = 'Test';
     user.id = '1';
 
