@@ -12,4 +12,9 @@ export class UpdateUserDto {
   @IsNotEmpty({ message: 'Field must be not empty' })
   @IsOptional()
   email?: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Field must be not empty' })
+  @IsOptional()
+  password?: string;
 }
